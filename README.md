@@ -11,10 +11,15 @@ requests
 2. 使用
 
 输入Layer子域名挖掘机/subDomainsBrute的子域名文件，也可以使用dnsdb.io导出json的文件
+
 利用masscan来进行扫描，根据自己的带宽设置扫描速度， 在 lib/mscan/Scan/xscan函数里编辑
+
 如果masscan失败，可以自己编译一下
+
 解析结果保存至MySQL, MySQL的配置在其自己的函数文件中：  util/MySqlTool中编辑
+
 需要首先创建MySQL的数据库, 默认库名为myipdb， 表名为myip, myport， 在ipdb.sql中
+
 剩下的可以用python subDomainsResultFormat.py -h 来查看
 
 
