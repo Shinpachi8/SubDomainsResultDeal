@@ -1,0 +1,243 @@
+passport.weibo.com            	180.149.138.190
+music.weibo.com               	180.149.138.196
+radio.weibo.com               	180.149.134.249
+media.weibo.com               	180.149.134.141, 180.149.134.142
+tuan.weibo.com                	220.181.136.30, 220.181.136.41
+event.weibo.com               	219.142.78.249
+video.weibo.com               	180.149.139.242
+plaza.weibo.com               	180.149.134.141, 180.149.134.142
+static.weibo.com              	58.63.238.222
+e.dpool.weibo.com             	180.149.134.141, 180.149.134.142
+no.dpool.weibo.com            	180.149.139.242
+v4.service.weibo.com          	180.149.134.141, 180.149.134.142
+open.weibo.com                	180.149.134.249
+data.weibo.com                	113.108.216.86
+sa.dpool.weibo.com            	180.149.134.249
+club.weibo.com                	180.149.138.235
+help.weibo.com                	180.149.134.249
+corp.weibo.com                	23.2.16.48, 23.2.16.74
+a.dpool.weibo.com             	180.149.134.249
+city.weibo.com                	180.149.134.249
+book.weibo.com                	221.179.190.250
+star.weibo.com                	180.149.134.216, 180.149.134.217
+index.weibo.com               	113.108.216.86
+live.weibo.com                	180.149.139.242
+o.dpool.weibo.com             	180.149.139.242
+photo.weibo.com               	180.149.139.242
+account.weibo.com             	180.149.138.236
+a2.dpool.weibo.com            	180.149.138.236
+service.weibo.com             	180.149.138.236
+card.weibo.com                	180.149.138.224
+focus.weibo.com               	180.149.138.196
+security.weibo.com            	180.149.138.190
+desktop.weibo.com             	180.149.134.249
+wallet.weibo.com              	180.149.134.249
+apps.weibo.com                	180.149.134.249
+talk.weibo.com                	180.149.134.249
+bang.weibo.com                	180.149.134.216
+v.dpool.weibo.com             	180.149.134.216
+camera.weibo.com              	180.149.139.242
+chang.weibo.com               	180.149.134.249
+chart.weibo.com               	180.149.134.216, 180.149.134.217
+discover.weibo.com            	180.149.134.141, 180.149.134.142
+fang.weibo.com                	180.149.138.207
+food.weibo.com                	180.149.134.154, 180.149.134.156
+game.weibo.com                	113.108.216.86
+lady.weibo.com                	113.108.216.86
+movie.weibo.com               	180.149.134.217
+content.dpool.weibo.com       	180.149.134.217
+place.weibo.com               	180.149.134.249
+sass.weibo.com                	180.149.134.249
+screen.weibo.com              	180.149.134.249
+show.weibo.com                	123.183.164.136, 42.81.28.74, 59.49.42.253
+sync.weibo.com                	111.13.88.225
+ting.weibo.com                	180.149.134.217
+travel.weibo.com              	113.108.216.86
+vote.weibo.com                	180.149.134.216, 180.149.134.217
+widget.weibo.com              	180.149.134.224
+n.dpool.weibo.com             	180.149.134.224
+xmpp.weibo.com                	180.149.134.227
+2013.weibo.com                	180.149.134.249
+2014.weibo.com                	180.149.138.236
+op.service.weibo.com          	180.149.138.236
+mapi.weibo.com                	180.149.139.248, 180.149.153.216, 180.149.153.242
+tongji.weibo.com              	221.179.175.174
+topic.weibo.com               	180.149.138.236
+zhaopin.weibo.com             	59.151.119.135, 59.151.119.137
+gongyi.weibo.com              	180.149.153.226
+a.weibo.com                   	180.149.134.141, 180.149.134.142
+c.weibo.com                   	180.149.134.195
+d.weibo.com                   	180.149.134.141, 180.149.134.142
+e.weibo.com                   	180.149.138.207
+m.weibo.com                   	180.149.139.248, 180.149.153.216, 180.149.153.242
+l.weibo.com                   	180.149.138.54
+l.dpool.weibo.com             	180.149.138.54
+p.weibo.com                   	59.110.91.120, 59.110.94.219
+q.weibo.com                   	180.149.134.249
+s.weibo.com                   	180.149.135.239
+1.weibo.com                   	180.149.153.253
+sc.dpool.weibo.com            	180.149.153.253
+7.weibo.com                   	180.149.134.110
+m.dpool.weibo.com             	180.149.134.110
+8.weibo.com                   	180.149.134.249
+cntv.weibo.com                	180.149.138.236
+x.weibo.com                   	180.149.134.110
+aq.weibo.com                  	180.149.138.190
+au.weibo.com                  	210.17.38.49
+at.weibo.com                  	210.17.38.22
+ba.weibo.com                  	180.149.134.249
+ca.weibo.com                  	66.102.251.33
+ch.weibo.com                  	210.17.38.22
+cn.weibo.com                  	180.149.134.141, 180.149.134.142
+de.weibo.com                  	210.17.38.49
+hk.weibo.com                  	218.213.85.50
+hr.weibo.com                  	61.172.201.176
+cf.weibo.com                  	180.149.138.207
+im.weibo.com                  	180.149.134.40
+ir.weibo.com                  	23.34.61.10, 23.34.61.24
+jp.weibo.com                  	210.17.38.49
+jx.weibo.com                  	180.149.134.249
+ka.weibo.com                  	180.149.138.196
+la.weibo.com                  	210.17.38.22
+fx.weibo.com                  	180.149.134.141, 180.149.134.142
+my.weibo.com                  	210.17.38.49
+kr.weibo.com                  	210.17.38.49
+me.weibo.com                  	180.149.134.216
+sc.weibo.com                  	180.149.138.238
+sg.weibo.com                  	210.17.38.49
+q.dpool.weibo.com             	180.149.138.238
+tv.weibo.com                  	180.149.134.217
+vn.weibo.com                  	210.17.38.22
+yi.weibo.com                  	123.125.104.197
+us.weibo.com                  	66.102.251.33
+api.weibo.com                 	180.149.135.176, 180.149.135.230
+app.weibo.com                 	180.149.134.249
+ask.weibo.com                 	218.30.114.191
+bar.weibo.com                 	180.149.134.249
+biz.weibo.com                 	180.149.134.228
+cai.weibo.com                 	123.126.56.253
+car.weibo.com                 	180.149.138.207
+gov.weibo.com                 	180.149.134.141, 180.149.134.142
+hao.weibo.com                 	180.149.138.236
+ma.dpool.weibo.com            	180.149.138.236
+hot.weibo.com                 	180.149.134.217
+ing.weibo.com                 	180.149.138.54
+mcn.weibo.com                 	180.149.134.216
+nba.weibo.com                 	180.149.138.196
+pai.weibo.com                 	180.149.153.233, 180.149.153.238
+pay.weibo.com                 	180.149.136.244
+pop.weibo.com                 	180.149.134.216, 180.149.134.217
+pro.weibo.com                 	180.149.138.248
+rich.dpool.weibo.com          	180.149.138.248
+sec.weibo.com                 	113.108.216.86
+top.weibo.com                 	113.108.216.86
+tui.weibo.com                 	180.149.138.248
+udc.weibo.com                 	220.181.136.30, 220.181.136.41
+vip.weibo.com                 	180.149.134.217
+wan.weibo.com                 	180.149.134.249
+www.weibo.com                 	180.149.134.141, 180.149.134.142
+sr.7.weibo.com                	180.149.134.110
+service.account.weibo.com     	180.149.138.236
+new.account.weibo.com         	180.149.138.236
+v6.bang.weibo.com             	180.149.134.216
+feed.book.weibo.com           	123.183.164.143, 42.81.9.47
+open.book.weibo.com           	221.179.190.239
+static.book.weibo.com         	123.183.164.143, 42.81.9.47
+api.c.weibo.com               	180.149.134.195
+ju.c.weibo.com                	180.149.138.238
+service.c.weibo.com           	123.125.106.224, 180.149.153.236
+tm.c.weibo.com                	180.149.138.238
+tz.c.weibo.com                	180.149.135.68
+api.camera.weibo.com          	180.149.134.237
+m.camera.weibo.com            	180.149.134.237
+api.card.weibo.com            	180.149.138.224
+finance.card.weibo.com        	180.149.138.224
+apps.e.weibo.com              	180.149.138.238
+data.e.weibo.com              	180.149.138.238
+hb.e.weibo.com                	180.149.134.196
+intra.e.weibo.com             	180.149.134.249
+mall.e.weibo.com              	180.149.134.196
+member.e.weibo.com            	180.149.134.249
+px.e.weibo.com                	180.149.138.207
+tb.e.weibo.com                	180.149.138.238
+pay.e.weibo.com               	123.125.29.237
+vi.e.weibo.com                	180.149.138.238
+storage.apps.e.weibo.com      	180.149.135.223, 218.30.114.123
+new.event.weibo.com           	180.149.138.238
+cdn.gongyi.weibo.com          	180.149.135.223, 218.30.114.123
+pop3.hao.weibo.com            	60.28.2.250
+smtp.hao.weibo.com            	60.28.2.250
+api.hk.weibo.com              	218.213.85.49
+m.hk.weibo.com                	218.213.85.198
+pay.hk.weibo.com              	218.213.85.7
+s.hk.weibo.com                	218.213.85.50
+share.hk.weibo.com            	218.213.85.73
+api.hot.weibo.com             	180.149.138.247
+new.hot.weibo.com             	180.149.138.247
+google.hr.weibo.com           	93.46.8.89
+04.google.hr.weibo.com        	8.7.198.45
+02.google.hr.weibo.com        	37.61.54.158
+0s.google.hr.weibo.com        	243.185.187.39
+0u.google.hr.weibo.com        	203.98.7.65
+123.google.hr.weibo.com       	78.16.49.15
+15.google.hr.weibo.com        	93.46.8.89
+2012.google.hr.weibo.com      	8.7.198.45
+2h.google.hr.weibo.com        	46.82.174.68
+2t.google.hr.weibo.com        	59.24.3.173
+2w.google.hr.weibo.com        	46.82.174.68
+2v.google.hr.weibo.com        	159.106.121.75
+3e.google.hr.weibo.com        	46.82.174.68
+3y.google.hr.weibo.com        	93.46.8.89
+0c.google.hr.weibo.com        	78.16.49.15
+0j.google.hr.weibo.com        	243.185.187.39
+4q.google.hr.weibo.com        	159.106.121.75
+17.google.hr.weibo.com        	243.185.187.39
+1j.google.hr.weibo.com        	37.61.54.158
+1k.google.hr.weibo.com        	159.106.121.75
+1z.google.hr.weibo.com        	8.7.198.45
+2r.google.hr.weibo.com        	37.61.54.158
+73.google.hr.weibo.com        	203.98.7.65
+3d.google.hr.weibo.com        	78.16.49.15
+3f.google.hr.weibo.com        	203.98.7.65
+68.google.hr.weibo.com        	59.24.3.173
+93.google.hr.weibo.com        	59.24.3.173
+relay.im.weibo.com            	180.149.135.6
+web.im.weibo.com              	180.149.138.174
+cloud.live.weibo.com          	180.149.139.242
+new.live.weibo.com            	182.92.24.64
+pl.live.weibo.com             	180.149.158.244, 220.181.78.108
+ps.live.weibo.com             	180.149.158.244
+service.live.weibo.com        	180.149.138.54
+us.live.weibo.com             	180.149.158.244, 220.181.78.108
+open.movie.weibo.com          	180.149.134.249
+service.movie.weibo.com       	180.149.134.217
+open.music.weibo.com          	180.149.134.249
+forum.open.weibo.com          	123.125.104.30
+pay.open.weibo.com            	180.149.134.249
+api.passport.weibo.com        	180.149.136.231
+gate.pay.weibo.com            	180.149.138.225
+api.photo.weibo.com           	180.149.139.242
+upload.photo.weibo.com        	180.149.139.242
+new.q.weibo.com               	180.149.134.249
+m.share.hk.weibo.com          	218.213.85.73
+sr.show.weibo.com             	123.183.164.136, 42.81.28.74, 59.49.42.253
+img.star.weibo.com            	180.149.135.223, 218.30.114.123
+open.ting.weibo.com           	180.149.134.249
+hotel.travel.weibo.com        	180.149.138.196
+m.travel.weibo.com            	113.108.216.86
+downloads.tv.weibo.com        	61.135.152.200
+hd.tv.weibo.com               	180.149.134.217
+app.tv.weibo.com              	218.30.108.202
+log.tv.weibo.com              	180.149.139.58
+open.tv.weibo.com             	180.149.134.217
+vr.tv.weibo.com               	180.149.134.217
+z.udc.weibo.com               	113.108.216.250
+p.vip.weibo.com               	180.149.134.217
+pay.vip.weibo.com             	180.149.134.217
+zt.vip.weibo.com              	180.149.134.110
+new.vote.weibo.com            	182.92.23.235
+v6.vote.weibo.com             	180.149.134.216
+img.zhaopin.weibo.com         	123.183.164.143, 42.81.9.47
+open.zhaopin.weibo.com        	59.151.73.14
+special.zhaopin.weibo.com     	59.151.119.135, 59.151.119.137
+www.zhaopin.weibo.com         	59.151.119.135
