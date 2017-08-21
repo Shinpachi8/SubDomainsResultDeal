@@ -13,6 +13,7 @@ from Queue import Queue
 import threading
 import json
 import re
+import nmap
 import logging
 
 logging.getLogger("requests").setLevel(logging.WARNING)
@@ -150,8 +151,16 @@ def Save2MySQL(filename, host=host, port=port, dbuser=dbuser, dbpassword=dbpassw
         # 默认判断端口
         if port in default_service:
             banner = default_service[port]
-        else:
+        elif title != '#E':
             banner = "http"
+        else:
+            # 如果要使用nmap的话，那么只能单个扫了，可能会浪费很多时间
+            banner = nmap_banner(ip, port)
+            if banner == "":
+                banner = "unrecognized"
+            # 如果banner不等于http，那么titile为'Na_Http_Service'
+            if banner != "http":
+                title = "Na_Http_Service"
         #print "len(title_queue): {0}\t ip:{1}\t port:{2}\t title:{3}".format((title_queue.qsize()), ip, port, title)
         try:
             cursor.execute("SELECT id FROM myip WHERE ip = '%s' ORDER BY id DESC" % ip)
@@ -164,6 +173,7 @@ def Save2MySQL(filename, host=host, port=port, dbuser=dbuser, dbpassword=dbpassw
                 cursor.execute("INSERT myport (ip_id, port, name, banner, http_title) value (%s,%s,%s,%s,%s)" % (str(ip_id), port, name, banner, title))
             conn.commit()
         except Exception as e:
+            print "[-] [MySqlTool] [Save2MySQL] [Error]" + repr(e)
             # ignore errors
             conn.rollback()
         except KeyboardInterrupt as e:
@@ -176,11 +186,28 @@ def Save2MySQL(filename, host=host, port=port, dbuser=dbuser, dbpassword=dbpassw
 
 
 
+def nmap_banner(ip, port):
+    banner = ""
+    nm = nmap.PortScanner()
+    print "[+] [MySqlTool] [nmap_banner] Namp:  {}:{}".format(ip, port)
+    try:
+        nm.scan(ip, port)
+
+        if nm[ip] and nm[ip].all_protocols() and "tcp" in nm[ip].all_protocols():
+            if nm[ip]["tcp"][int(port)]['state'] == "open":
+                banner = nm[ip]["tcp"][int(port)]['name']
+                return banner
+    except Exception as e:
+        print "[-] [MySqlTool] [nmap_banner] [Error] " + repr(e)
+    return banner
+
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 2:
-        print help
-        sys.exit(0)
-    filename = sys.argv[1]
-    main(host, port, dbuser, dbpassword, db, filename)
+    #if len(sys.argv) != 2:
+    #    print help
+    #    sys.exit(0)
+    #filename = sys.argv[1]
+    #main(host, port, dbuser, dbpassword, db, filename)
+    banner = nmap_banner("180.149.134.63", "9090")
+    print banner

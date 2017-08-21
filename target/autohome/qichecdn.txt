@@ -1,0 +1,16 @@
+imap.qichecdn.com             	211.150.84.8
+smtp.qichecdn.com             	120.52.48.5
+11.qichecdn.com               	202.233.202.22
+jk.qichecdn.com               	223.202.49.205
+pc.qichecdn.com               	223.202.49.198
+wz.qichecdn.com               	124.239.197.125
+tx.qichecdn.com               	223.202.49.181
+yc.qichecdn.com               	219.148.35.197, 221.192.136.197
+pop.qichecdn.com              	38.83.106.84, 38.83.106.85, 54.209.81.157, 54.86.81.5
+www.qichecdn.com              	223.202.33.196
+pic.pc.qichecdn.com           	223.202.49.199
+test.tx.qichecdn.com          	192.168.6.92
+app.wz.qichecdn.com           	124.239.197.125
+business.wz.qichecdn.com      	124.239.197.125
+s.wz.qichecdn.com             	61.240.151.125
+tg.wz.qichecdn.com            	61.240.151.125

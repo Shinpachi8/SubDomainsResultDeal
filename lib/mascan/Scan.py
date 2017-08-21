@@ -39,7 +39,7 @@ class Scan(object):
     
 
     @staticmethod
-    def xScan(ip, port=None, argument="-oX xScanResult.xml --open --rate=1500"):
+    def xScan(ip, port=None, argument="-oX xScanResult.xml --open --rate=1000"):
         """
         #//todo: 这里还需要再改一下，将结果返回在一个固定的目录里边，这是城暂时先这样，把所有结构完整后再来搞这个
 
