@@ -1,7 +1,7 @@
 #coding=utf-8
 
 """
-Scan class. 
+Scan class.
 to Scan IP.
 
 111.206.13.65
@@ -36,17 +36,17 @@ class Scan(object):
         for host in mas.all_hosts:
             scanResult[host] = mas[host]["tcp"].keys()
         return scanResult
-    
+
 
     @staticmethod
-    def xScan(ip, port=None, argument="-oX xScanResult.xml --open --rate=1000"):
+    def xScan(ip, port=None, argument="-oX xScanResult.xml --open --rate=1500"):
         """
         #//todo: 这里还需要再改一下，将结果返回在一个固定的目录里边，这是城暂时先这样，把所有结构完整后再来搞这个
 
         """
         _= os.path.split(os.path.realpath(__file__))[0]
         macan_path = os.path.join(_, "masscan/bin/masscan")
-        if port is None: 
+        if port is None:
             #port = "21,22,23,443,445,2375,4098,1433,873,6300,7377,6301,8000-10000,11211,27017,28017,2181,80-100,6379,9000,8196"
             #port = "21,22,23,443,445,2375,4098,1433,873,6300,7377,6301,8000-10000,11211,27017,28017,2181,80-100,6379,9000,8196,5432,1099,7001-7002"
             port = '21,22,80-100,389,443-445'\
@@ -67,7 +67,7 @@ class Scan(object):
         p = subprocess.Popen(MASSCAN, shell=True, stdout=subprocess.PIPE)
         (output, err) = p.communicate()
         # print "[-] Masscan Stop, Go Check xScanResult.xml"
-        
+
 
 if __name__ == '__main__':
     Scan.xScan("60.28.175.1/28")

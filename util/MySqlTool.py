@@ -22,9 +22,9 @@ requests.packages.urllib3.disable_warnings()
 # global config
 
 host = "127.0.0.1"
-port = 3306
+port = 3307
 dbuser = "root"
-dbpassword = ""
+dbpassword = "root"
 db = "myipdb"
 
 help =  """
@@ -41,7 +41,7 @@ def Save2MySQL(filename, host=host, port=port, dbuser=dbuser, dbpassword=dbpassw
     conn = mdb.connect(host=host, port=port, user=dbuser, passwd=dbpassword, db=db)
     cursor = conn.cursor()
     result = parseTool.parse(filename)
-    
+
     values = []
     ip_set = set()
     for i in result:
@@ -55,7 +55,7 @@ def Save2MySQL(filename, host=host, port=port, dbuser=dbuser, dbpassword=dbpassw
     del ip_set
     # get isp infomation, not important but useful maybe.
     threads = []
-    for i in xrange(60):
+    for i in xrange(30):
         thread = GetIsp(ip_queue, isp_queue)
         threads.append(thread)
 
@@ -73,31 +73,33 @@ def Save2MySQL(filename, host=host, port=port, dbuser=dbuser, dbpassword=dbpassw
         try:
             ip, isp = isp_queue.get(timeout=1)
         except Exception as e:
-            break
+            continue
         #print "len(value):{0} \t ip:{1} \t isp:{2}".format((isp_queue.qsize()), ip, isp)
         try:
             count = cursor.execute("SELECT * FROM myip WHERE ip = '{0}'".format(ip))
+            
             if count:
                 tmp = cursor.fetchone()
                 if tmp[2] == isp and tmp[3] == company:
                     continue
                 else:
-                    count = cursor.execute("UPDATE myip set isp = '%s', company='%s'  WHERE id=%d" %(isp, company ,tmp[0]))
-                    #print "[+] UPDATE success!!!"
+                    count = cursor.execute("UPDATE myip set isp = '{0}', company='{1}'  WHERE id={2}".format(isp, company ,tmp[0]))
+                    print "[+] UPDATE success!!!"
             else:
-                count = cursor.execute("INSERT myip (ip, isp, company) value (%s, %s, %s)" %(ip, isp, company))
-                #print "[+] INSERT success!!!"
+                print "[+] [MySqlTool] [Save2MySQL] [ISP] " +  "INSERT myip (ip, isp, company) value (`%s`, `%s`, `%s`)" %(ip, isp, company)
+                count = cursor.execute("INSERT myip (ip, isp, company) value ('{0}', '{1}', '{2}')".format(ip, isp, company))
+                print "[+] INSERT success!!!"
             conn.commit()
         except Exception as e:
-            # print str(e)
+            print "[-] [MySqlTool] [SaveIspToMySQL] " + repr(e)
             conn.rollback()
-   
+
     # parse port and save it to mysql
-    # data: 17-06-19 
+    # data: 17-06-19
     data = []
     port_queue = Queue()
     title_queue = Queue()
-    sql_insert_port = "insert myport (ip_id, port, name, banner, http_title) value (%s, %s, %s, %s, %s)"
+    sql_insert_port = "insert myport (ip_id, port, name, banner, http_title) value ('{ip_id}', '{port}', {name}, {banner}, {http_title})"
 
     # did not know why reverse it.
     for i in result[::-1]:
@@ -109,7 +111,7 @@ def Save2MySQL(filename, host=host, port=port, dbuser=dbuser, dbpassword=dbpassw
         port_queue.put((ip, port, name, banner))
 
     threads = []
-    for i in xrange(150):
+    for i in xrange(50):
         thd = GetTitle(port_queue, title_queue)
         threads.append(thd)
 
@@ -146,7 +148,7 @@ def Save2MySQL(filename, host=host, port=port, dbuser=dbuser, dbpassword=dbpassw
         try:
             ip, port, name, banner, title = title_queue.get(timeout=1)
         except Exception as e:
-            break
+            continue
         _result.append((ip, port, title))
         # 默认判断端口
         if port in default_service:
@@ -159,18 +161,18 @@ def Save2MySQL(filename, host=host, port=port, dbuser=dbuser, dbpassword=dbpassw
             if banner == "":
                 banner = "unrecognized"
             # 如果banner不等于http，那么titile为'Na_Http_Service'
-            if banner != "http":
+            elif banner != "http":
                 title = "Na_Http_Service"
         #print "len(title_queue): {0}\t ip:{1}\t port:{2}\t title:{3}".format((title_queue.qsize()), ip, port, title)
         try:
-            cursor.execute("SELECT id FROM myip WHERE ip = '%s' ORDER BY id DESC" % ip)
+            cursor.execute("SELECT id FROM myip WHERE ip = '{ip}' ORDER BY id DESC".format(ip=ip))
             ip_id = cursor.fetchone()[0]
-            count = cursor.execute("SELECT * FROM myport WHERE ip_id = %s AND port = %s" % (ip_id, port))
+            count = cursor.execute("SELECT * FROM myport WHERE ip_id = '{ip_id}' AND port = '{port}'".format(ip_id=ip_id, port=port))
             if count:
-                cursor.execute("UPDATE myport set name=%s, banner=%s, http_title=%s WHERE ip_id=%s and port=%s" %(name, banner, title, str(ip_id), port))
-                # print "UPDATE success!!!"
+                cursor.execute("UPDATE myport set name='{name}', banner='{banner}', http_title='{http_title}' WHERE ip_id='{ip_id}' and port='{port}'".format(name=name, banner=banner, http_title=title, ip_id=str(ip_id), port=port))
+                print "UPDATE success!!!"
             else:
-                cursor.execute("INSERT myport (ip_id, port, name, banner, http_title) value (%s,%s,%s,%s,%s)" % (str(ip_id), port, name, banner, title))
+                cursor.execute("INSERT myport (ip_id, port, name, banner, http_title) value ('{ip_id}','{port}','{name}', '{banner}', '{http_title}')".format(ip_id=str(ip_id), port=port, name=name, banner=banner, http_title=title))
             conn.commit()
         except Exception as e:
             print "[-] [MySqlTool] [Save2MySQL] [Error]" + repr(e)
@@ -209,5 +211,6 @@ if __name__ == '__main__':
     #    sys.exit(0)
     #filename = sys.argv[1]
     #main(host, port, dbuser, dbpassword, db, filename)
-    banner = nmap_banner("180.149.134.63", "9090")
-    print banner
+    # banner = nmap_banner("180.149.134.63", "9090")
+    # print banner
+    Save2MySQL("../xScanResult.xml", company="autohome")

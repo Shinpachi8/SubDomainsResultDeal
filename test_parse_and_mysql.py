@@ -11,6 +11,7 @@ from util.GetTitle2 import GetTitle
 from util.GetIsp import GetIsp
 import MySQLdb as mdb
 from Queue import Queue
+from util.MysqlTool import Save2MySQL
 import threading
 import json
 import re
@@ -21,7 +22,7 @@ logging.getLogger("requests").setLevel(logging.WARNING)
 # global config
 
 host = "127.0.0.1"
-port = 3306
+port = 3307
 dbuser = "root"
 dbpassword = ""
 db = "myipdb"
@@ -30,6 +31,7 @@ help =  """
         Usage:  python xx.py filename
 
         """
+
 
 
 
