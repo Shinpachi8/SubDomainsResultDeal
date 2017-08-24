@@ -22,9 +22,9 @@ requests.packages.urllib3.disable_warnings()
 # global config
 
 host = "127.0.0.1"
-port = 3307
+port = 3306
 dbuser = "root"
-dbpassword = "root"
+dbpassword = ""
 db = "myipdb"
 
 help =  """
@@ -148,11 +148,15 @@ def Save2MySQL(filename, host=host, port=port, dbuser=dbuser, dbpassword=dbpassw
         try:
             ip, port, name, banner, title = title_queue.get(timeout=1)
         except Exception as e:
+            print "[-] [MySqlTool] [Save2MySQL] [SaveTitle] " + repr(e)
             continue
         _result.append((ip, port, title))
         # 默认判断端口
         if port in default_service:
             banner = default_service[port]
+
+        """
+        # 暂时不使用了, 因为会报警，而且太慢了.. 后边可以考虑用猪猪侠的扫描端口，这样就可以后台了
         elif title != '#E':
             banner = "http"
         else:
@@ -163,6 +167,7 @@ def Save2MySQL(filename, host=host, port=port, dbuser=dbuser, dbpassword=dbpassw
             # 如果banner不等于http，那么titile为'Na_Http_Service'
             elif banner != "http":
                 title = "Na_Http_Service"
+        """
         #print "len(title_queue): {0}\t ip:{1}\t port:{2}\t title:{3}".format((title_queue.qsize()), ip, port, title)
         try:
             cursor.execute("SELECT id FROM myip WHERE ip = '{ip}' ORDER BY id DESC".format(ip=ip))

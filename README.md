@@ -16,7 +16,7 @@ requests
 
 如果masscan失败，可以自己编译一下
 
-解析结果保存至MySQL, MySQL的配置在其自己的函数文件中：  util/MySqlTool中编辑
+解析结果保存至MySQL, MySQL的配置在其自己的函数文件中：  util/MySqlTool中编辑, 在里边也可以单独解析xml文件的扫描结果(包括Nmap, masscan)
 
 需要首先创建MySQL的数据库, 默认库名为myipdb， 表名为myip, myport， 在ipdb.sql中
 
@@ -41,7 +41,11 @@ requests
 
     7. 对于返回title的端口，与IP一起使用BBSCAN扫描，结果存在report/目录下
 
+    8. 增加了对每一个端口的Nmap端口解析banner的函数，但是nmap扫描会报警，而且比较慢，所以暂时注释掉了。
+
 - 待更新：
+    0. 针对上边的nmap比较慢的问题，可以使用猪猪侠已经写完的thorns来利用celery 异步完成，为了完成这样的结果， 考虑是否需要再更改一张数据库？分别存储？
+
     1. spider一下子域名`./lib/SpiderAndXcsl/`，(已做，LowBee爬虫，可自行替换， 尚未合并)
     
     2. 将其中的包含参数的URL，推入XSSDETECT(已完成), 进行反射XSS, 本地文件包含 (未完成)
