@@ -77,7 +77,7 @@ class GetTitle(threading.Thread):
             if m:
                 title = m[0]
             else:
-                title = resp.text.replace("\n", "").strip()[0:200]
+                title = resp.text.replace("\n", "").replace(" ", "")[0:200]
             return title
         except Exception as e:
             return "#E"

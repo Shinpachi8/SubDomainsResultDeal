@@ -7,7 +7,7 @@ import sys
 from bs4 import BeautifulSoup as bs
 from parseTool import parseTool
 from GetTitle2 import GetTitle
-from GetIsp import GetIsp
+from GetIsp import GetIsp, getSingleIpIsp
 import MySQLdb as mdb
 from Queue import Queue
 import threading
@@ -22,9 +22,9 @@ requests.packages.urllib3.disable_warnings()
 # global config
 
 host = "127.0.0.1"
-port = 3306
+port = 3307
 dbuser = "root"
-dbpassword = ""
+dbpassword = "root"
 db = "myipdb"
 
 help =  """
@@ -72,6 +72,9 @@ def Save2MySQL(filename, host=host, port=port, dbuser=dbuser, dbpassword=dbpassw
             break
         try:
             ip, isp = isp_queue.get(timeout=1)
+            # update 17-09-04 if "CDN" in isp, pass it
+            if (isp.find("CDN") != -1) or (isp.find("cdn") != -1):
+                continue
         except Exception as e:
             continue
         #print "len(value):{0} \t ip:{1} \t isp:{2}".format((isp_queue.qsize()), ip, isp)
@@ -107,6 +110,10 @@ def Save2MySQL(filename, host=host, port=port, dbuser=dbuser, dbpassword=dbpassw
         port = i[1]
         name = i[2].strip()
         banner = i[3].strip()
+        # if found a ip belong's cdn， then do not put it in the port_queue
+        isp = getSingleIpIsp(ip)
+        if isp.find("CDN") != -1 or isp.find("cdn") != -1:
+            continue
         #print (ip, port, name, banner)
         port_queue.put((ip, port, name, banner))
 
@@ -155,7 +162,6 @@ def Save2MySQL(filename, host=host, port=port, dbuser=dbuser, dbpassword=dbpassw
         if port in default_service:
             banner = default_service[port]
 
-        """
         # 暂时不使用了, 因为会报警，而且太慢了.. 后边可以考虑用猪猪侠的扫描端口，这样就可以后台了
         elif title != '#E':
             banner = "http"
@@ -165,9 +171,8 @@ def Save2MySQL(filename, host=host, port=port, dbuser=dbuser, dbpassword=dbpassw
             if banner == "":
                 banner = "unrecognized"
             # 如果banner不等于http，那么titile为'Na_Http_Service'
-            elif banner != "http":
+            elif banner not in ["http", "https"]:
                 title = "Na_Http_Service"
-        """
         #print "len(title_queue): {0}\t ip:{1}\t port:{2}\t title:{3}".format((title_queue.qsize()), ip, port, title)
         try:
             cursor.execute("SELECT id FROM myip WHERE ip = '{ip}' ORDER BY id DESC".format(ip=ip))
@@ -175,17 +180,18 @@ def Save2MySQL(filename, host=host, port=port, dbuser=dbuser, dbpassword=dbpassw
             count = cursor.execute("SELECT * FROM myport WHERE ip_id = '{ip_id}' AND port = '{port}'".format(ip_id=ip_id, port=port))
             if count:
                 cursor.execute("UPDATE myport set name='{name}', banner='{banner}', http_title='{http_title}' WHERE ip_id='{ip_id}' and port='{port}'".format(name=name, banner=banner, http_title=title, ip_id=str(ip_id), port=port))
-                print "UPDATE success!!!"
             else:
                 cursor.execute("INSERT myport (ip_id, port, name, banner, http_title) value ('{ip_id}','{port}','{name}', '{banner}', '{http_title}')".format(ip_id=str(ip_id), port=port, name=name, banner=banner, http_title=title))
             conn.commit()
-        except Exception as e:
-            print "[-] [MySqlTool] [Save2MySQL] [Error]" + repr(e)
-            # ignore errors
-            conn.rollback()
         except KeyboardInterrupt as e:
             # ignore errors
             logging.info("[User Kill] [MySQLTool.Save2MySQL] Ctrl-C Kill Process")
+            conn.rollback()
+            break
+        
+        except Exception as e:
+            print "[-] [MySqlTool] [Save2MySQL] [Error]" + repr(e)
+            # ignore errors
             conn.rollback()
 
     conn.close()
@@ -196,26 +202,21 @@ def Save2MySQL(filename, host=host, port=port, dbuser=dbuser, dbpassword=dbpassw
 def nmap_banner(ip, port):
     banner = ""
     nm = nmap.PortScanner()
-    print "[+] [MySqlTool] [nmap_banner] Namp:  {}:{}".format(ip, port)
+    
     try:
-        nm.scan(ip, port)
-
+        nm.scan(ip, port, arguments='--script=banner')
         if nm[ip] and nm[ip].all_protocols() and "tcp" in nm[ip].all_protocols():
             if nm[ip]["tcp"][int(port)]['state'] == "open":
                 banner = nm[ip]["tcp"][int(port)]['name']
                 return banner
     except Exception as e:
         print "[-] [MySqlTool] [nmap_banner] [Error] " + repr(e)
+    
+    print "[+] [MySqlTool] [nmap_banner] Namp:  {}:{} [banner]:{}".format(ip, port, banner)
     return banner
 
 
 
 if __name__ == '__main__':
-    #if len(sys.argv) != 2:
-    #    print help
-    #    sys.exit(0)
-    #filename = sys.argv[1]
-    #main(host, port, dbuser, dbpassword, db, filename)
-    # banner = nmap_banner("180.149.134.63", "9090")
-    # print banner
+
     Save2MySQL("../xScanResult.xml", company="autohome")

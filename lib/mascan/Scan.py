@@ -39,7 +39,7 @@ class Scan(object):
 
 
     @staticmethod
-    def xScan(ip, port=None, argument="-oX xScanResult.xml --open --rate=1500"):
+    def xScan(ip, port=None, argument="-oX xScanResult.xml --open --rate=1500", allPort=False):
         """
         #//todo: 这里还需要再改一下，将结果返回在一个固定的目录里边，这是城暂时先这样，把所有结构完整后再来搞这个
 
@@ -61,6 +61,8 @@ class Scan(object):
                     ',25734-25735,26214,27000,27017-27018,27352-27353,27355-27356,27715,28201,30000,30718,30951,31038,31337,32768-32785'\
                     ',49163,49165,49167,49175-49176,49400,49999-50003,50006,50300,50389,50500,50636,50800,51103,51493,52673,52822'\
 
+        if allPort:
+            port = "1-65530"
 
         MASSCAN = "{0} {1} -p{2} {3}".format(macan_path, ip, port, argument)
         # print "[+] Start Masscan: {0}".format(MASSCAN)

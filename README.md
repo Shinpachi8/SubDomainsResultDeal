@@ -24,7 +24,7 @@ requests
 
 
 
-# update: 2017-0802
+# update: 2017-0907
 - 基本工作已经完成，这里包含以下几种功能：
 
     1. 接收SubDomainsBrute和Layer子域名挖掘机的结果， 同时可以加载dnsdb.io导出的json文件, 支持cname/ type a 
@@ -43,7 +43,12 @@ requests
 
     8. 增加了对每一个端口的Nmap端口解析banner的函数，但是nmap扫描会报警，而且比较慢，所以暂时注释掉了。
 
+    9. 对于fastcgi, elasticsearch的rce和 rmi的java反序列化做了插件, 增加了扫描所有端口的选项
+
 - 待更新：
+    - 置顶:
+        这里发现一些插件太乱了，回头可以写在一个类里，用不同的方法来实现。这里不会用太多插件，所以一个类应该可以优化的过来。
+
     0. 针对上边的nmap比较慢的问题，可以使用猪猪侠已经写完的thorns来利用celery 异步完成，为了完成这样的结果， 考虑是否需要再更改一张数据库？分别存储？
 
     1. spider一下子域名`./lib/SpiderAndXcsl/`，(已做，LowBee爬虫，可自行替换， 尚未合并)

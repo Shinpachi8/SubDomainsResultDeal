@@ -78,6 +78,25 @@ def _getisp(ip, ret):
         pass
 
 
+
+
+def getSingleIpIsp(ip):
+    try:
+        url = "http://ip.chinaz.com/{0}"
+        #print "[-] Parseing " + url
+        res = requests.get(url.format(ip), headers=headers, timeout=5).content
+        soup = bs(res, "html.parser")
+        #local = soup.findall("span", attrs={"class": "Whwtdhalf w50-0"})[1]
+        local = soup.find_all("span", attrs={"class": "Whwtdhalf w50-0"})[1]
+        #print local.text
+        
+        return local.text
+    except Exception as e:
+        #print str(e)
+        return ""
+
+
+
 if __name__ == '__main__':
     a = Queue.Queue()
     ap= Queue.Queue()

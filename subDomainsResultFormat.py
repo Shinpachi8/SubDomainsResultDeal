@@ -23,7 +23,9 @@ from lib.mascan.Scan import Scan
 from lib.BBscanApi import *
 from util.unauth.PortBrute import *
 from util.unauth.unauthDetect import * 
-
+from util.plugin.20170904_elasticsearch_rce import FuzzES
+from util.plugin.20170904_fastcgi import fastcgiFuzz
+from util.plugin.20170907_rmiScan import 
 logging.basicConfig(level=logging.INFO,
                     format='[%(threadname)s^^%(lineno)d]:\t %(message)s')#输出格式
 logging.getLogger("requests").setLevel(logging.WARNING)
@@ -90,6 +92,7 @@ def parseArg():
     parser.add_argument("-oi", "--outip", help="Output file to save ip, dafult: out_{date}_ip.txt")
     parser.add_argument("-t", "--thread", type=int, default=100, help="thread number, default 100")
     parser.add_argument("--company", help="the company name or host this scan")
+    parser.add_argument("-allPort", help="scan all port", action='store_true', default=False)
     parser.add_argument("--num", type=int, default=5, help="the C count to scan default 5")
     parser.add_argument("--skip", type=int, default=0, help="in scan, skip top n ips to scan, must lt num")
     parser.add_argument("--bbscan", default=True, action='store_true', help='start bbscan')
@@ -167,13 +170,19 @@ def main():
     # found the most num host in mask 24
     C_section = FormatOutput.net_section(out_ip_fn, num=args.num)
 
-    print C_section
     #sys.exit(-1)
     all_host = {}
     # vulnearble host
     vulnearble = []
     # zookeeper IP list
     zookeeper_host = []
+    # es ip list
+    elasticsearch_host = []
+    # fastcgi ip list
+    fastcgi_host = []
+    # rmi host list
+    rmi_host = []
+
     # error ip when scanning
     bad_host = []
     # ip with ftp, ssh or mysql
@@ -185,10 +194,10 @@ def main():
     # 保存至file中，调用 BBscan中的-f参数
     hosts = []
     for c_s in C_section[args.skip:]:
-        print c_s
+        print "[Info] [main] [Scan Ips]:\t " + str(c_s)
         try:
             logging.info("[Info] [main] Scan {}st ip with mask 24".format(C_section.index(c_s)))
-            Scan.xScan(c_s)
+            Scan.xScan(c_s, allPort=args.allPort)
             logging.info("[Info] [main] Scan Finished. Go Parse XML And Save It To MySQL")
             _ = Save2MySQL("xScanResult.xml", company=company)
             # item in _ like [(ip, port, title),()]
@@ -209,14 +218,11 @@ def main():
                 elif port == "2181":
                     zookeeper_host.append(ip)
                 elif port == "9000":
-                    # fastcgi scan
-                    pass
+                    fastcgi_host.append(ip)
                 elif port == "9200":
-                    # es scan
-                    pass
+                    elasticsearch_host.append(ip)
                 elif port == "1099":
-                    # rmi deSerializable
-                    pass
+                    rmi_host.append(ip)
                 # 分别为ftp, ssh, telnet, smb, docker, rsync, mssql, mongodb, mongodb, redis
                 if port not in ["21", "22", "445", "2375", "873", "1433", "27017", "6379", "11211", "3306", "3389", "2181", "1099"] and title not in ["", "#E"]:
                     hosts.append("{0}:{1}".format(ip, port))
@@ -233,6 +239,26 @@ def main():
     # scan zookeeper
     tmp = zooUnauth(zookeeper_host)
     vulnearble.extend(tmp)
+
+    # es scaner
+    for ip in elasticsearch_host:
+        a = FuzzES(ip)
+        if a.runFuzz():
+            _ = {"target": ip+":9200", "type": "[Hign]es rce", "info": "es rce"}
+            vulnearble.append(_)
+
+    # fastcgi scanner
+    for ip in fastcgi_host:
+        aim = fastcgiFuzz(ip)
+        if aim:
+            _ = {"target": ip + ":9000", "type": "[Hign] fastcgi", "info": "fastcgi file read"}
+            vulnearble.append(_)
+    
+    for ip in rmi_host:
+        aim = RmiScan(ip)
+        if aim:
+            _ = {"target": ip + ":1099", "type": "[Hign] rmi unserialize rce", "info": "rmi unserialize rce"}
+            vulnearble.append(_)            
 
     # bbscan api to scan sensitive file
     with open("toBBscan.txt", "w") as f:

@@ -12,6 +12,7 @@ from util.GetIsp import GetIsp
 import MySQLdb as mdb
 from Queue import Queue
 from util.MysqlTool import Save2MySQL
+from util.plugin.20170904elasticsearch_rce import FuzzES
 import threading
 import json
 import re
